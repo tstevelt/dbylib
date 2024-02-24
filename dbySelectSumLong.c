@@ -52,7 +52,7 @@ long dbySelectSumLong ( MYSQL *MySql, char *Table, char *Field, char *WhereClaus
 		sprintf ( Statement, "select sum(%s) from %s where %s", Field, Table, WhereClause );
 	}
 
-	Query = dbySelect ( "dbySelectCount", MySql, Statement, LogFileName );
+	Query = dbySelect ( "dbySelectSumLong", MySql, Statement, LogFileName );
 
 	if ( Query != NULL && Query->NumRows == 1 )
 	{

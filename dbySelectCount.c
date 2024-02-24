@@ -8,6 +8,7 @@
 
 	Who		Date		Modification
 	---------------------------------------------------------------------
+	tms		02/24/2024	Return ZERO instead of -1 on errors.
 
 ----------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------
@@ -56,13 +57,13 @@ long dbySelectCount ( MYSQL *MySql, char *Table, char *WhereClause, char *LogFil
 	RecordCount = 0;
 	if ( Query == (DBY_QUERY *) 0 )
 	{
-		RecordCount = -1L;
+		RecordCount = 0;
 	}
 	else if ( Query->NumRows == 0 )
 	{
 		dbyFreeQuery ( Query );
 		Query = (DBY_QUERY *) 0;
-		RecordCount = -1L;
+		RecordCount = 0;
 	}
 	else 
 	{
@@ -72,7 +73,7 @@ long dbySelectCount ( MYSQL *MySql, char *Table, char *WhereClause, char *LogFil
 		}
 		else
 		{
-			RecordCount = -1L;
+			RecordCount = 0;
 		}
 		dbyFreeQuery ( Query );
 		Query = (DBY_QUERY *) 0;

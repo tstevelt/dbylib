@@ -52,7 +52,7 @@ double dbySelectSumDouble ( MYSQL *MySql, char *Table, char *Field, char *WhereC
 		sprintf ( Statement, "select sum(%s) from %s where %s", Field, Table, WhereClause );
 	}
 
-	Query = dbySelect ( "dbySelectCount", MySql, Statement, LogFileName );
+	Query = dbySelect ( "dbySelectSumDouble", MySql, Statement, LogFileName );
 
 	if ( Query != NULL && Query->NumRows == 1 )
 	{

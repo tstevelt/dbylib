@@ -9,6 +9,7 @@
 
 	Who		Date		Modification
 	---------------------------------------------------------------------
+	tms		02/24/2024	Return ZERO instead of -1 on errors.
 
 ----------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------
@@ -58,13 +59,13 @@ int dbySelectAvg ( MYSQL *MySql, char *Table, char *Field, char *WhereClause, ch
 
 	if ( Query == (DBY_QUERY *) 0 )
 	{
-		ReturnValue = -1L;
+		ReturnValue = 0;
 	}
 	else if ( Query->NumRows == 0 )
 	{
 		dbyFreeQuery ( Query );
 		Query = (DBY_QUERY *) 0;
-		ReturnValue = -1L;
+		ReturnValue = 0;
 	}
 	else 
 	{
@@ -74,7 +75,7 @@ int dbySelectAvg ( MYSQL *MySql, char *Table, char *Field, char *WhereClause, ch
 		}
 		else
 		{
-			ReturnValue = -1L;
+			ReturnValue = 0;
 		}
 		dbyFreeQuery ( Query );
 		Query = (DBY_QUERY *) 0;

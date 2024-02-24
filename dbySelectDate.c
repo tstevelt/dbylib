@@ -43,7 +43,7 @@ static	char		strDate[12];
 
 	strDate[0] = '\0';
 
-	Query = dbySelect ( "dbySelectCount", MySql, Statement, LogFileName );
+	Query = dbySelect ( "dbySelectDate", MySql, Statement, LogFileName );
 
 	if ( Query != NULL && Query->NumRows == 1 )
 	{
