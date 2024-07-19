@@ -49,6 +49,7 @@ void dbyCommitInit ( MYSQL *MySql )
 	if ( mysql_autocommit ( MySql, 0 ) != 0 )
 	{
 		fprintf ( stderr, "dbyCommitInit: Cannot turn autocommit OFF\n" );
+		fprintf ( stderr, "dbyCommitInit: %s\n", mysql_error(MySql) );
 		exit ( 1  );
 	}
 }
