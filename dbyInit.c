@@ -50,16 +50,22 @@ void dbyInit ( MYSQL *MySql,
 
 	if ( mysql_init ( MySql ) == (MYSQL *)0 )
 	{
-		snprintf ( xbuf, sizeof(xbuf),
-			 "Error: mysql_init() failed, error: %s", mysql_error(MySql) );
+		snprintf ( xbuf, sizeof(xbuf), "Error: mysql_init() failed" );
+		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "dbyInit: %s", mysql_error(MySql) );
+		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "Host %s User %s Passwd %s Db %s", Host, User, Passwd, Db );
 		logmsg ( LogFileName, xbuf );
 		exit ( 1 );
 	}
 
 	if ( mysql_real_connect ( MySql, Host, User, Passwd, Db, Port, NULL, 0 ) == NULL )
 	{
-		snprintf ( xbuf, sizeof(xbuf),
-			 "Error: mysql_real_connect() failed, error: %s", mysql_error(MySql) );
+		snprintf ( xbuf, sizeof(xbuf), "Error: mysql_real_connect() failed" );
+		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "dbyInit: %s", mysql_error(MySql) );
+		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "Host %s User %s Passwd %s Db %s", Host, User, Passwd, Db );
 		logmsg ( LogFileName, xbuf );
 		exit ( 1 );
 	}
@@ -79,12 +85,20 @@ int dbyInitNoExit ( MYSQL *MySql,
 	{
 		snprintf ( xbuf, sizeof(xbuf), "Error: mysql_init() failed" );
 		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "dbyInitNoExit: %s", mysql_error(MySql) );
+		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "Host %s User %s Passwd %s Db %s", Host, User, Passwd, Db );
+		logmsg ( LogFileName, xbuf );
 		return ( -1 );
 	}
 
 	if ( mysql_real_connect ( MySql, Host, User, Passwd, Db, Port, NULL, 0 ) == NULL )
 	{
 		snprintf ( xbuf, sizeof(xbuf), "Error: mysql_real_connect() failed" );
+		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "dbyInitNoExit: %s", mysql_error(MySql) );
+		logmsg ( LogFileName, xbuf );
+		snprintf ( xbuf, sizeof(xbuf), "Host %s User %s Passwd %s Db %s", Host, User, Passwd, Db );
 		logmsg ( LogFileName, xbuf );
 		return ( -2 );
 	}

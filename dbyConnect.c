@@ -362,6 +362,7 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 
 	if ( rv < 0 )
 	{
+		fprintf ( stderr, "dbyConnect: %s\n", mysql_error(MySql) );
 		return ( DBY_CONN_ERR_MYSQL );
 	}
 
