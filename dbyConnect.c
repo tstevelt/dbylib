@@ -356,7 +356,7 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 #define CONNECT_OR_DIE
 #ifdef CONNECT_OR_DIE
 	dbyInit ( MySql, DbHost, DbUser, DbPassword, DbName, 3306, LOGFILENAME );
-	rv = -1;
+	rv = 0;
 #else
 	rv = dbyInitNoExit ( MySql, DbHost, DbUser, DbPassword, DbName, 3306, LOGFILENAME );
 #endif
