@@ -36,6 +36,8 @@
 #include	"shslib.h"
 #include	"dbylib.h"
 
+int		DebugdbySelectCount = 0;
+
 static	char	Statement[1024];
 
 long dbySelectCount ( MYSQL *MySql, char *Table, char *WhereClause, char *LogFileName )
@@ -50,6 +52,11 @@ long dbySelectCount ( MYSQL *MySql, char *Table, char *WhereClause, char *LogFil
 	else
 	{
 		sprintf ( Statement, "select count(*) from %s where %s", Table, WhereClause );
+	}
+
+	if ( DebugdbySelectCount )
+	{
+		printf ( "%s\n", Statement );
 	}
 
 	Query = dbySelect ( "dbySelectCount", MySql, Statement, LogFileName );

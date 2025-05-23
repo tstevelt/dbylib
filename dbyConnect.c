@@ -37,6 +37,7 @@
 #include	"dbylib.h"
 
 #define		LOGFILENAME		"/var/local/dbylib.log"
+// dupe symbol char		*LogFileName = "/var/local/dbylib.log";
 LICENSE_RECORD	LicenseInfo;
 static	int		DebugConnect = 0;
 
@@ -88,7 +89,7 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 
 	if ( DebugConnect )
 	{
-		fprintf ( stderr, "dbyConnect: DB [%s] User [%s] CheckStatus [%d]<br>\n", DbName, UserName, CheckStatus );
+		fprintf ( fpError, "dbyConnect: DB [%s] User [%s] CheckStatus [%d]<br>\n", DbName, UserName, CheckStatus );
 	}
 
 	if (( fp = fopen ( fn, "r" )) == (FILE *)0 )
@@ -153,7 +154,7 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 		{
 			if ( DebugConnect )
 			{
-				fprintf ( stderr, "%d %s %s\n", tokcnt, tokens[0], tokens[1] );
+				fprintf ( fpError, "%d %s %s\n", tokcnt, tokens[0], tokens[1] );
 			}
 
 			if ( nsStrcmp ( tokens[0], "dbhost" ) == 0 )
@@ -250,8 +251,8 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 
 		if ( DebugConnect )
 		{
-			fprintf ( stderr, "%s\n", LicenseKey );
-			fprintf ( stderr, "%s\n", PlainText );
+			fprintf ( fpError, "%s\n", LicenseKey );
+			fprintf ( fpError, "%s\n", PlainText );
 		}
 
 #ifdef WEAK_CHECKSUM_AND_BEFORE_APPSTR
@@ -297,7 +298,7 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 
 		if ( DebugConnect )
 		{
-			fprintf ( stderr, "KeySum %d CheckSum %d\n", (int)KeySum,  (int)CheckSum );
+			fprintf ( fpError, "KeySum %d CheckSum %d\n", (int)KeySum,  (int)CheckSum );
 		}
 
 		if ( KeySum != (short) CheckSum )
@@ -326,7 +327,7 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 
 		if ( DebugConnect )
 		{
-			fprintf ( stderr, "tokens[1] %s,  ExpirationDate.year4 %d, Days %d\n", 
+			fprintf ( fpError, "tokens[1] %s,  ExpirationDate.year4 %d, Days %d\n", 
 				tokens[1], LicenseInfo.ExpirationDate.year4, LicenseInfo.DaysToExpiration );
 		}
 
@@ -343,14 +344,14 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 
 		if ( DebugConnect )
 		{
-			fprintf ( stderr, "Database %s\n", tokens[0] );
-			fprintf ( stderr, "Expires  %d/%d/%d\n", LicenseInfo.ExpirationDate.month, LicenseInfo.ExpirationDate.day, LicenseInfo.ExpirationDate.year4 );
+			fprintf ( fpError, "Database %s\n", tokens[0] );
+			fprintf ( fpError, "Expires  %d/%d/%d\n", LicenseInfo.ExpirationDate.month, LicenseInfo.ExpirationDate.day, LicenseInfo.ExpirationDate.year4 );
 		}
 	}
 
 	if ( DebugConnect )
 	{
-		fprintf ( stderr, "dbyConnect: before call dbyInitNoExit\n" );
+		fprintf ( fpError, "dbyConnect: before call dbyInitNoExit\n" );
 	}
 
 #define CONNECT_OR_DIE
@@ -363,12 +364,12 @@ int dbyConnect (  MYSQL *MySql, char *DbName, char *UserName, int CheckStatus, F
 
 	if ( DebugConnect )
 	{
-		fprintf ( stderr, "dbyConnect: dbyInitNoExit returned %d\n", rv );
+		fprintf ( fpError, "dbyConnect: dbyInitNoExit returned %d\n", rv );
 	}
 
 	if ( rv < 0 )
 	{
-		fprintf ( stderr, "dbyConnect: %s\n", mysql_error(MySql) );
+		fprintf ( fpError, "dbyConnect: %s\n", mysql_error(MySql) );
 		return ( DBY_CONN_ERR_MYSQL );
 	}
 
